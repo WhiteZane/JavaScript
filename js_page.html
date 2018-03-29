@@ -1,0 +1,178 @@
+<!doctype html>
+	<head>
+		<title> Java script Form </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	</head>
+	
+	<body>
+		<div id="div1" class="main"></div>
+	</body>
+	<style>
+			.tbl{
+				width:800px;
+				margin:0 auto;
+			}
+			.btn {
+				width:60px;
+	  			display:inline-block;
+	   			margin-left:80vw;
+	 			margin-top: 150px;
+			}
+
+			/* The Modal (background) */
+			.modal {
+			    display: none; /* Hidden by default */
+			    position: fixed; /* Stay in place */
+			    z-index: 1; /* Sit on top */
+			    padding-top: 100px; /* Location of the box */
+			    left: 0;
+			    top: 0;
+			    width: 100%; /* Full width */
+			    height: 100%; /* Full height */
+			    overflow: auto; /* Enable scroll if needed */
+			    background-color: rgb(0,0,0); /* Fallback color */
+			    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+
+			/* Modal Content */
+			.modal-content {
+			    background-color: #fefefe;
+			    margin: auto;
+			    padding: 20px;
+			    border: 1px solid #888;
+			    width: 80%;
+			}
+
+			/* The Close Button */
+			.close {
+			    color: #aaaaaa;
+			    float: right;
+			    font-size: 28px;
+			    font-weight: bold;
+			}
+
+			.close:hover,
+			.close:focus {
+			    color: #000;
+			    text-decoration: none;
+			    cursor: pointer;
+			}
+	</style>
+	<script>
+
+		/*function createPage(){
+			var head = document.createElement("h1");
+			var node = document.createTextNode("This is a Javascript Form");
+			head.appendChild(node);
+
+
+			var element = document.getElementById("div1");
+			document.getElementById("div1").appendChild(head);
+		}*/
+		function NewPage(){
+			// creating the title
+			this.title = document.createElement("h1");
+			this.title.setAttribute("class", "w3-container w3-teal" );
+			this.titleNode = document.createTextNode("This is a Javascript Form");
+
+			this.title.appendChild(this.titleNode);
+
+			this.button = document.createElement("a");
+			this.button.setAttribute("id", "editBtn" );
+			this.button.setAttribute("class", "w3-btn w3-teal btn" );
+
+			this.buttonNode = document.createTextNode("Edit");
+
+			this.button.appendChild(this.buttonNode);
+			
+			//creating the table
+			var table = document.createElement('table');
+			table.setAttribute("class", "w3-table-all w3-large tbl" );
+			var row = table.insertRow(0);
+			var col = row.insertCell(0);
+			col.innerHTML =123;
+			
+			//create a new row
+			row = table.insertRow(0);
+			col = row.insertCell(0);
+			col.innerHTML = 456;
+			
+			//create another row
+			row = table.insertRow(0);
+			col = row.insertCell(0);
+			col.innerHTML = 456;
+
+			//The Modal Div
+			this.modal = document.createElement("div");
+			this.modal.setAttribute("id", "myModal" );
+			this.modal.setAttribute("class", "modal" );
+
+			this.modalContent = document.createElement("div");
+			this.modalContent.setAttribute("class", "modal-content" );
+
+			this.modalSpan = document.createElement("span");
+			this.modalSpan.setAttribute("class", "close" );
+			this.modalSpanNode = document.createTextNode("X");
+			this.modalSpan.appendChild(this.modalSpanNode);
+
+			//Modal form to pass data
+			this.modalForm = document.createElement("Form");
+			this.modalFormTxtArea = document.createElement("textarea");
+			this.modalFormTxtNode = document.createTextNode("Click to change row 1");
+			this.modalFormTxtArea.appendChild(this.modalFormTxtNode);
+			
+			this.modalFormTxtArea2 = document.createElement("textarea");
+			this.modalFormTxtNode2 = document.createTextNode("Click to change row 2");
+			this.modalFormTxtArea2.appendChild(this.modalFormTxtNode2);
+
+			this.modalFormTxtArea3 = document.createElement("textarea");
+			this.modalFormTxtNode3 = document.createTextNode("Click to change row 3");
+			this.modalFormTxtArea3.appendChild(this.modalFormTxtNode3);			
+			
+			this.modalForm.appendChild(this.modalFormTxtArea);
+			this.modalForm.appendChild(this.modalFormTxtArea2);
+			this.modalForm.appendChild(this.modalFormTxtArea3);
+			// appending to the content
+			this.modalContent.appendChild(this.modalSpan);
+			this.modalContent.appendChild(this.modalForm);
+			
+
+			this.modal.appendChild(this.modalContent);
+
+			// append items to dive element 
+			var element = document.getElementById("div1");
+			document.getElementById("div1").appendChild(this.title);
+			document.getElementById("div1").appendChild(this.button);
+			document.getElementById("div1").appendChild(table);
+			document.getElementById("div1").appendChild(this.modal);
+
+		}
+		//function to open the edit window
+		function openWin(){
+			var modal = document.getElementById('myModal');
+			modal.style.display = "block";
+
+		}
+		//function to open the edit window
+		function closeWin(){
+			var modal = document.getElementById('myModal');
+			modal.style.display = "none";
+
+		}
+
+		// function containing other functions to load on start 
+		function start(){
+			NewPage();
+			//Click open Modal
+			document.getElementById("editBtn").addEventListener("click", openWin);
+			//Click close Modal
+			var span = document.getElementsByClassName("close")[0];
+			span.addEventListener("click", closeWin);
+		}
+		// loads any functions stored in start on window load
+		window.onload = start();
+		
+		
+	</script>
+</html>
