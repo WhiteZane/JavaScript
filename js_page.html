@@ -61,15 +61,6 @@
 	</style>
 	<script>
 
-		/*function createPage(){
-			var head = document.createElement("h1");
-			var node = document.createTextNode("This is a Javascript Form");
-			head.appendChild(node);
-
-
-			var element = document.getElementById("div1");
-			document.getElementById("div1").appendChild(head);
-		}*/
 		function NewPage(){
 			// creating the title
 			this.title = document.createElement("h1");
@@ -91,17 +82,17 @@
 			table.setAttribute("class", "w3-table-all w3-large tbl" );
 			var row = table.insertRow(0);
 			var col = row.insertCell(0);
-			col.innerHTML =123;
+			col.innerHTML ="";
 			
 			//create a new row
 			row = table.insertRow(0);
 			col = row.insertCell(0);
-			col.innerHTML = 456;
+			col.innerHTML ="";
 			
 			//create another row
 			row = table.insertRow(0);
 			col = row.insertCell(0);
-			col.innerHTML = 456;
+			col.innerHTML ="You can change the table by pressing edit";
 
 			//The Modal Div
 			this.modal = document.createElement("div");
@@ -118,21 +109,77 @@
 
 			//Modal form to pass data
 			this.modalForm = document.createElement("Form");
-			this.modalFormTxtArea = document.createElement("textarea");
-			this.modalFormTxtNode = document.createTextNode("Click to change row 1");
-			this.modalFormTxtArea.appendChild(this.modalFormTxtNode);
+			this.modalForm.setAttribute("class", "w3-container w3-teal" );
 			
-			this.modalFormTxtArea2 = document.createElement("textarea");
-			this.modalFormTxtNode2 = document.createTextNode("Click to change row 2");
-			this.modalFormTxtArea2.appendChild(this.modalFormTxtNode2);
+			// text input form
+			this.modalFormPara = document.createElement("p");
+			this.modalFormLabel = document.createElement("label");
+			this.modalFormLabelNode = document.createTextNode("field 1");
+			this.modalFormTxtInput = document.createElement("INPUT");
+			this.modalFormTxtInput.setAttribute("class", "w3-input ");
+			this.modalFormTxtInput.setAttribute("type", "text");
+			
+			//put text into label
+			this.modalFormLabel.appendChild(this.modalFormLabelNode);
+			
+			//put elements into paragraph
+			this.modalFormPara.appendChild(this.modalFormLabel);
+			this.modalFormPara.appendChild(this.modalFormTxtInput);
 
-			this.modalFormTxtArea3 = document.createElement("textarea");
-			this.modalFormTxtNode3 = document.createTextNode("Click to change row 3");
-			this.modalFormTxtArea3.appendChild(this.modalFormTxtNode3);			
+			this.modalFormPara2 = document.createElement("p");
+			this.modalFormLabel2 = document.createElement("label");
+			this.modalFormLabel2Node = document.createTextNode("field 2");
+			this.modalFormTxtInput2 = document.createElement("INPUT");
+			this.modalFormTxtInput2.setAttribute("class", "w3-input ");
+			this.modalFormTxtInput2.setAttribute("type", "text");
 			
-			this.modalForm.appendChild(this.modalFormTxtArea);
-			this.modalForm.appendChild(this.modalFormTxtArea2);
-			this.modalForm.appendChild(this.modalFormTxtArea3);
+			//put text into label
+			this.modalFormLabel2.appendChild(this.modalFormLabel2Node);
+			
+			//put elements into paragraph
+			this.modalFormPara2.appendChild(this.modalFormLabel2);
+			this.modalFormPara2.appendChild(this.modalFormTxtInput2);
+
+
+
+			this.modalFormPara3 = document.createElement("p");
+			this.modalFormLabel3 = document.createElement("label");
+			this.modalFormLabel3Node = document.createTextNode("field 3");
+			this.modalFormTxtInput3 = document.createElement("INPUT");
+			this.modalFormTxtInput3.setAttribute("class", "w3-input ");
+			this.modalFormTxtInput3.setAttribute("type", "text");
+			
+			//put text  into label
+			this.modalFormLabel3.appendChild(this.modalFormLabel3Node);
+			
+			//put elements into paragraph
+			this.modalFormPara3.appendChild(this.modalFormLabel3);
+			this.modalFormPara3.appendChild(this.modalFormTxtInput3);
+
+			//putting paragraphs into modal form
+			this.modalForm.appendChild(this.modalFormPara);
+			this.modalForm.appendChild(this.modalFormPara2);
+			this.modalForm.appendChild(this.modalFormPara3);
+
+			// create buttons
+			this.modalFormSave = document.createElement("a");
+			this.modalFormSave.setAttribute("id", "save" );
+			this.modalFormSave.setAttribute("class", "save w3-button w3-red");
+			this.modalFormSaveNode = document.createTextNode("Save");
+			this.modalFormCancel = document.createElement("a");
+			this.modalFormCancel.setAttribute("id", "cancel" );
+			this.modalFormCancel.setAttribute("class", "cancel w3-button w3-black");
+			this.modalFormCancelNode = document.createTextNode("Close");
+			
+			// add text to buttons
+			this.modalFormSave.appendChild(this.modalFormSaveNode);	
+			this.modalFormCancel.appendChild(this.modalFormCancelNode); 
+			
+			// add buttons to form
+			this.modalForm.appendChild(modalFormSave);
+			this.modalForm.appendChild(modalFormCancel);
+
+			// add buttons to 
 			// appending to the content
 			this.modalContent.appendChild(this.modalSpan);
 			this.modalContent.appendChild(this.modalForm);
@@ -160,15 +207,40 @@
 			modal.style.display = "none";
 
 		}
+		//function to save doc
+		function saveDoc(){
+			//grab the inputs from modal set variables
+			 var input3 = modalFormTxtInput3.value;
+			 var input2 = modalFormTxtInput2.value;
+			 var input = modalFormTxtInput.value;
+			 var all = input + input2 + input3;
+			 
+			 // send the data to the table
+			 document.getElementsByTagName("td")[0].innerHTML = input;
+			 document.getElementsByTagName("td")[1].innerHTML = input2;
+			 document.getElementsByTagName("td")[2].innerHTML = input3;
+			 
+			 //close the modal
+			 closeWin();
+
+		}
 
 		// function containing other functions to load on start 
 		function start(){
 			NewPage();
 			//Click open Modal
 			document.getElementById("editBtn").addEventListener("click", openWin);
+			
 			//Click close Modal
 			var span = document.getElementsByClassName("close")[0];
 			span.addEventListener("click", closeWin);
+
+			//Click save button 
+			document.getElementById("save").addEventListener("click", saveDoc);
+
+			//Click cancel button 
+			document.getElementById("cancel").addEventListener("click", closeWin);
+
 		}
 		// loads any functions stored in start on window load
 		window.onload = start();
