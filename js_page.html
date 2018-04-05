@@ -60,15 +60,17 @@
 			}
 	</style>
 	<script>
-
-		function NewPage(){
+		
+		function title(){
 			// creating the title
 			this.title = document.createElement("h1");
 			this.title.setAttribute("class", "w3-container w3-teal" );
 			this.titleNode = document.createTextNode("This is a Javascript Form");
-
 			this.title.appendChild(this.titleNode);
-
+			return this;
+		}
+		function editBtn(){
+			//create edit button	
 			this.button = document.createElement("a");
 			this.button.setAttribute("id", "editBtn" );
 			this.button.setAttribute("class", "w3-btn w3-teal btn" );
@@ -76,25 +78,34 @@
 			this.buttonNode = document.createTextNode("Edit");
 
 			this.button.appendChild(this.buttonNode);
+		}
+		
+		function table(){
+			//create a loop to create table entries
+			this.table = document.createElement('table');
+			this.table.setAttribute("class", "w3-table-all w3-large tbl" );
+			var amount = 1;
+			var counter = 0;
+			var col ="";
 			
-			//creating the table
-			var table = document.createElement('table');
-			table.setAttribute("class", "w3-table-all w3-large tbl" );
-			var row = table.insertRow(0);
-			var col = row.insertCell(0);
-			col.innerHTML ="";
-			
-			//create a new row
-			row = table.insertRow(0);
-			col = row.insertCell(0);
-			col.innerHTML ="";
-			
-			//create another row
-			row = table.insertRow(0);
-			col = row.insertCell(0);
-			col.innerHTML ="You can change the table by pressing edit";
+			do {
+				var row = this.table.insertRow(0);
+				// create columns
+				for (var i = 0; i < amount; i++ ){
+					
+					col[i] = row.insertCell(0);
+					//not working should insert text into columns
+					col.innerHTML ="To change text press edit";
+				
+				}
+				
+				counter ++;
+			}
+				
+			while (counter < 3);
+		}
 
-			//The Modal Div
+		function modal(){
 			this.modal = document.createElement("div");
 			this.modal.setAttribute("id", "myModal" );
 			this.modal.setAttribute("class", "modal" );
@@ -110,56 +121,27 @@
 			//Modal form to pass data
 			this.modalForm = document.createElement("Form");
 			this.modalForm.setAttribute("class", "w3-container w3-teal" );
-			
-			// text input form
-			this.modalFormPara = document.createElement("p");
-			this.modalFormLabel = document.createElement("label");
-			this.modalFormLabelNode = document.createTextNode("field 1");
-			this.modalFormTxtInput = document.createElement("INPUT");
-			this.modalFormTxtInput.setAttribute("class", "w3-input ");
-			this.modalFormTxtInput.setAttribute("type", "text");
-			
-			//put text into label
-			this.modalFormLabel.appendChild(this.modalFormLabelNode);
-			
-			//put elements into paragraph
-			this.modalFormPara.appendChild(this.modalFormLabel);
-			this.modalFormPara.appendChild(this.modalFormTxtInput);
-
-			this.modalFormPara2 = document.createElement("p");
-			this.modalFormLabel2 = document.createElement("label");
-			this.modalFormLabel2Node = document.createTextNode("field 2");
-			this.modalFormTxtInput2 = document.createElement("INPUT");
-			this.modalFormTxtInput2.setAttribute("class", "w3-input ");
-			this.modalFormTxtInput2.setAttribute("type", "text");
-			
-			//put text into label
-			this.modalFormLabel2.appendChild(this.modalFormLabel2Node);
-			
-			//put elements into paragraph
-			this.modalFormPara2.appendChild(this.modalFormLabel2);
-			this.modalFormPara2.appendChild(this.modalFormTxtInput2);
-
-
-
-			this.modalFormPara3 = document.createElement("p");
-			this.modalFormLabel3 = document.createElement("label");
-			this.modalFormLabel3Node = document.createTextNode("field 3");
-			this.modalFormTxtInput3 = document.createElement("INPUT");
-			this.modalFormTxtInput3.setAttribute("class", "w3-input ");
-			this.modalFormTxtInput3.setAttribute("type", "text");
-			
-			//put text  into label
-			this.modalFormLabel3.appendChild(this.modalFormLabel3Node);
-			
-			//put elements into paragraph
-			this.modalFormPara3.appendChild(this.modalFormLabel3);
-			this.modalFormPara3.appendChild(this.modalFormTxtInput3);
-
-			//putting paragraphs into modal form
-			this.modalForm.appendChild(this.modalFormPara);
-			this.modalForm.appendChild(this.modalFormPara2);
-			this.modalForm.appendChild(this.modalFormPara3);
+			//create loop to automate form
+			var count = 3;
+			var i = 0;
+			this.modalFormPara = [];
+			this.modalFormLabel = [];
+			this.modalFormLabelNode = [];
+			this.modalFormTxtInput = [];
+			// create input fields
+			do{
+				this.modalFormPara[i] = document.createElement("p");
+				this.modalFormLabel = document.createElement("p");
+				this.modalFormLabelNode = document.createTextNode("input field");
+				this.modalFormTxtInput[i] = document.createElement("INPUT");
+				this.modalFormTxtInput[i].setAttribute("id", [i]);
+				this.modalFormTxtInput[i].setAttribute("class", "w3-input");
+				this.modalFormTxtInput[i].setAttribute("type", "text");
+				this.modalFormLabel.appendChild(this.modalFormLabelNode);
+				this.modalFormPara[i].appendChild(this.modalFormTxtInput[i]);
+				this.modalForm.appendChild(this.modalFormPara[i]);
+				i++;
+			}while (i < count);
 
 			// create buttons
 			this.modalFormSave = document.createElement("a");
@@ -176,8 +158,8 @@
 			this.modalFormCancel.appendChild(this.modalFormCancelNode); 
 			
 			// add buttons to form
-			this.modalForm.appendChild(modalFormSave);
-			this.modalForm.appendChild(modalFormCancel);
+			this.modalForm.appendChild(this.modalFormSave);
+			this.modalForm.appendChild(this.modalFormCancel);
 
 			// add buttons to 
 			// appending to the content
@@ -187,38 +169,59 @@
 
 			this.modal.appendChild(this.modalContent);
 
-			// append items to dive element 
+			return this.modalFormTxtInput;
+		}
+
+		
+		
+		function NewPage(){
+			
+			// append items to div element creating the page
 			var element = document.getElementById("div1");
-			document.getElementById("div1").appendChild(this.title);
-			document.getElementById("div1").appendChild(this.button);
+			document.getElementById("div1").appendChild(title);
+			document.getElementById("div1").appendChild(button);
 			document.getElementById("div1").appendChild(table);
-			document.getElementById("div1").appendChild(this.modal);
+			document.getElementById("div1").appendChild(modal);
+			return this;
 
 		}
+		NewPage.prototype = Object.create(title(),editBtn(),table());
+
+		//checking access
+		NewPage.prototype.table = alert("accesing prototype table");
+
+		
+
+
 		//function to open the edit window
 		function openWin(){
 			var modal = document.getElementById('myModal');
 			modal.style.display = "block";
 
 		}
-		//function to open the edit window
+
+		//function to close the edit window
 		function closeWin(){
 			var modal = document.getElementById('myModal');
 			modal.style.display = "none";
-
 		}
+
 		//function to save doc
 		function saveDoc(){
 			//grab the inputs from modal set variables
-			 var input3 = modalFormTxtInput3.value;
-			 var input2 = modalFormTxtInput2.value;
-			 var input = modalFormTxtInput.value;
-			 var all = input + input2 + input3;
+			
+			 
+			 var input = document.getElementById("0").value;
+			 var input2 = document.getElementById("1").value;
+			 var input3 = document.getElementById("2").value;
 			 
 			 // send the data to the table
 			 document.getElementsByTagName("td")[0].innerHTML = input;
 			 document.getElementsByTagName("td")[1].innerHTML = input2;
 			 document.getElementsByTagName("td")[2].innerHTML = input3;
+			 /*document.getElementsByTagName("td")[3].innerHTML = "test 3";
+			 document.getElementsByTagName("td")[4].innerHTML = "test 4";
+			 document.getElementsByTagName("td")[5].innerHTML = "test 5";*/
 			 
 			 //close the modal
 			 closeWin();
@@ -227,7 +230,11 @@
 
 		// function containing other functions to load on start 
 		function start(){
-			NewPage();
+			//call the page elements
+			var this_modal = modal();
+			console.log(this_modal);
+			var page = new NewPage();
+
 			//Click open Modal
 			document.getElementById("editBtn").addEventListener("click", openWin);
 			
@@ -242,9 +249,10 @@
 			document.getElementById("cancel").addEventListener("click", closeWin);
 
 		}
+		
+		
 		// loads any functions stored in start on window load
 		window.onload = start();
-		
 		
 	</script>
 </html>
