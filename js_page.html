@@ -176,7 +176,8 @@
 			newpage.editBtn = function makeEditButton(){
 				this.button = document.createElement("a");
 				this.button.setAttribute("id", "editBtn" );
-				this.button.setAttribute("class", "w3-btn w3-teal btn" );
+				this.button.setAttribute("class", "w3-btn w3-teal btn");
+				this.button.setAttribute("value", "1");
 
 				this.buttonNode = document.createTextNode("Edit");
 
@@ -293,6 +294,9 @@
 				//Click open Modal
 				document.getElementById("editBtn").addEventListener("click", openWin);
 				
+				// click to get rid of a few things for download
+				document.getElementById("downloadBtn").addEventListener("click", download);
+				
 				//Click close Modal
 				var span = document.getElementsByClassName("close")[0];
 				span.addEventListener("click", closeWin);
@@ -344,16 +348,22 @@
 					}
 			}
 
+			
+			//function to close the edit window
+			function closeWin(){
+				var modal = document.getElementById('myModal');
+				modal.style.display = "none";
+			}
+			function download(){
+				alert("made it to function");
+
+			}
+
 			function openWin(){
 				var modal = document.getElementById('myModal');
 				modal.style.display = "block";
 
-				//function to close the edit window
-			}
 				
-			function closeWin(){
-				var modal = document.getElementById('myModal');
-				modal.style.display = "none";
 			}
 						
 			//function to save doc
@@ -387,7 +397,7 @@
 			
 		}());
 	</script>
-	<a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" class="w3-btn w3-teal btn" href="#" download="js_page.html">Download</a>
+	<a id="downloadBtn" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" class="w3-btn w3-teal btn" href="#" download="js_page.html">Download</a>
 
 </html>
 <script type="text/javascript">
