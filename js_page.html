@@ -13,11 +13,15 @@
 				width:800px;
 				margin:0 auto;
 			}
+			.btnE {
+				margin-top:50px;
+				margin-left: 5vw;
+			}
 			.btn {
 				width:150px;
 	  			display:inline-block;
-	   			margin-left:80vw;
-	 			margin-top: 150px;
+	   			margin-left:5vw;
+	 			margin-top: 100px;
 			}
 
 			/* The Modal (background) */
@@ -191,7 +195,7 @@
 			newpage.editBtn = function makeEditButton(){
 				this.button = document.createElement("a");
 				this.button.setAttribute("id", "editBtn" );
-				this.button.setAttribute("class", "w3-btn w3-teal btn");
+				this.button.setAttribute("class", "w3-btn w3-teal btnE");
 				this.button.setAttribute("value", "1");
 
 				this.buttonNode = document.createTextNode("Edit");
@@ -447,8 +451,8 @@
 				+ "\n" + "After downloading you may still see the create button, however it will not work.");
 	}
 	</script>
-	<a id="downloadBtn" onclick="removeDownload();this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" class="w3-btn w3-teal btn" href="#" download="js_page.html">Download</a>
 	<a id="downloadBtn" onclick="help();" class="w3-btn w3-blue btn" href="#" download="js_page.html">Help</a>
+	<a id="downloadBtn" onclick="removeDownload();this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" class="w3-btn w3-teal btn" href="#" download="js_page.html">Download</a>
 </html>
 <script type="text/javascript">
 	//add event listeners
