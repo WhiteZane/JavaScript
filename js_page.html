@@ -173,6 +173,18 @@
 				return this;
 			}
 			//creates an edit button
+			newpage.createBtn = function makeCreateButton(){
+				this.button2 = document.createElement("a");
+				this.button2.setAttribute("id", "createBtn" );
+				this.button2.setAttribute("class", "w3-btn w3-red btn");
+
+				this.buttonNode2 = document.createTextNode("Create");
+
+				this.button2.appendChild(this.buttonNode2);
+				element.appendChild(this.button2);
+				return this;
+			}
+			//creates an edit button
 			newpage.editBtn = function makeEditButton(){
 				this.button = document.createElement("a");
 				this.button.setAttribute("id", "editBtn" );
@@ -310,6 +322,8 @@
 			}
 			
 			newpage.variables = function getVars(){
+				var cBtn = document.getElementById('createBtn');
+				cBtn.style.display = "none";
 				var test = Object.create(newpage,{inputTitle:{value:document.getElementById("inputTitle").value}});
 				console.log(test);
 				var test2 = Object.create(newpage,{inputRows:{value:document.getElementById("inputRows").value}});
@@ -318,6 +332,7 @@
 				console.log(test3);
 				//continue loading page
 				newpage.view();
+
 				return this;
 			}
 
@@ -355,6 +370,13 @@
 				modal.style.display = "none";
 			}
 			function download(){
+				// hide buttons
+				var cBtn = document.getElementById('createBtn');
+				cBtn.style.display = "none";
+				var edit = document.getElementById("editBtn")
+				edit.style.display = "none";
+				var down = document.getElementById("downloadBtn")
+				down.style.display = "none";
 				alert("made it to function");
 
 			}
@@ -376,13 +398,14 @@
 		//creating the page	
 			
 			var element = document.getElementById("div1");
-			
 			//ask for page content
+			newpage.createBtn();
 			newpage.createModal();
-			newpage.openModal();
+			document.getElementById("createBtn").addEventListener("click", newpage.openModal);
 			document.getElementById("create").addEventListener("click", newpage.variables);
 			document.getElementById("cancelCreate").addEventListener("click", closeCreate);
-			
+		
+
 			function closeCreate(){
 				var modal = document.getElementById('createModal');
 				modal.style.display = "none";	
@@ -396,8 +419,26 @@
 
 			
 		}());
+	function removeDownload(){
+
+		var divView = document.getElementById('div1');
+
+		var cBtn = document.getElementById('createBtn');
+					
+		var edit = document.getElementById("editBtn");
+					
+		// var down = document.getElementById("downloadBtn");
+		
+		divView.removeChild(cBtn);
+		divView.removeChild(edit);
+		// divView.removeChild(down);
+			
+		// var downloadedPage = document.documentElement.outerHTML;
+
+		// return downloadedPage;
+	}
 	</script>
-	<a id="downloadBtn" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" class="w3-btn w3-teal btn" href="#" download="js_page.html">Download</a>
+	<a id="downloadBtn" onclick="removeDownload();this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" class="w3-btn w3-teal btn" href="#" download="js_page.html">Download</a>
 
 </html>
 <script type="text/javascript">
