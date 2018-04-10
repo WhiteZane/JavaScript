@@ -62,7 +62,7 @@
 	<script>
 		// This was an activity to help me learn how to better use javascript. 
 		// the reason there is little HTML is because the goal was to learn javascript.
-		
+
 		(function() {
 
 			var newpage = {};
@@ -440,9 +440,15 @@
 
 		// return downloadedPage;
 	}
+	function help(){
+		alert("This page creates a table to get started press create and fill out the form"+ "\n"
+				+ "To add to the table press edit and you can input data" +"\n"+
+				"If you would like to keep your finished table press Download and a copy will be downloaded"
+				+ "\n" + "After downloading you may still see the create button, however it will not work.");
+	}
 	</script>
 	<a id="downloadBtn" onclick="removeDownload();this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" class="w3-btn w3-teal btn" href="#" download="js_page.html">Download</a>
-
+	<a id="downloadBtn" onclick="help();" class="w3-btn w3-blue btn" href="#" download="js_page.html">Help</a>
 </html>
 <script type="text/javascript">
 	//add event listeners
