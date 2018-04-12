@@ -481,17 +481,15 @@
 		
 		divView.removeChild(cBtn);
 		divView.removeChild(edit);
-		// divView.removeChild(down);
-			
-		// var downloadedPage = document.documentElement.outerHTML;
-
-		// return downloadedPage;
+		
 	}
 	function help(){
 		alert("This page creates a table to get started press create and fill out the form"+ "\n"
 				+ "To add to the table press edit and you can input data" +"\n"+
 				"If you would like to keep your finished table press Download and a copy will be downloaded"
-				+ "\n" + "After downloading you may still see the create button, however it will not work.");
+				+ "\n" + "After downloading the program will still be able to run locally." 
+				+ "\n" + "However you cannot edit your previous table it cannot be deleted unless you delete the file"
+				+ "\n" + "You can use the create button to make a new table, but you will need to download the new table to save it.");
 	}
 	</script>
 	<a id="downloadBtn" onclick="help();" class="w3-btn w3-blue btn" href="#" download="js_page.html">Help</a>
