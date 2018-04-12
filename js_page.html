@@ -137,7 +137,7 @@
 
 				// create buttons
 				this.modalFormSave1 = document.createElement("a");
-				this.modalFormSave1.setAttribute("id", "create" );
+				this.modalFormSave1.setAttribute("id", "createBtn" );
 				this.modalFormSave1.setAttribute("class", "save w3-button w3-red");
 				this.modalFormSaveNode1 = document.createTextNode("Create");
 				this.modalFormCancel1 = document.createElement("a");
@@ -183,30 +183,31 @@
 				element.appendChild(this.title);
 				return this;
 			}
-			//creates an edit button
+			//This can create the buttons
 			newpage.createBtn = function makeCreateButton(){
-				this.button2 = document.createElement("a");
-				this.button2.setAttribute("id", "createBtn" );
-				this.button2.setAttribute("class", "w3-btn w3-red btn");
+	
+				var classBtn =this.btnClass;
+				console.log(classBtn);
+				var nameBtn = this.btnName;
+				console.log(nameBtn);
 
-				this.buttonNode2 = document.createTextNode("Create");
+				this.button= [];
+				
+				this.button[nameBtn] = document.createElement("a");
+				this.button[nameBtn].setAttribute("id", nameBtn );
+				this.button[nameBtn].setAttribute("class", classBtn);
+				
+				// don not use [] with nodes, nodes do not require anything besides defining where it goes.
+				this.buttonNode = document.createTextNode(nameBtn, [nameBtn]);
 
-				this.button2.appendChild(this.buttonNode2);
-				element.appendChild(this.button2);
+				this.button[nameBtn].appendChild(this.buttonNode);
+				//create button 
+				element.appendChild(this.button[nameBtn]);
+				
+				
+				
 				return this;
-			}
-			//creates an edit button
-			newpage.editBtn = function makeEditButton(){
-				this.button = document.createElement("a");
-				this.button.setAttribute("id", "editBtn" );
-				this.button.setAttribute("class", "w3-btn w3-teal btnE");
-				this.button.setAttribute("value", "1");
 
-				this.buttonNode = document.createTextNode("Edit");
-
-				this.button.appendChild(this.buttonNode);
-				element.appendChild(this.button);
-				return this;
 			}
 			
 			//creates a table
@@ -317,7 +318,7 @@
 			//Intializes the Event listners
 			newpage.init = function initListners(){
 				//Click open Modal
-				document.getElementById("editBtn").addEventListener("click", openWin);
+				document.getElementById("Edit").addEventListener("click", openWin);
 				
 				// click to get rid of a few things for download
 				document.getElementById("downloadBtn").addEventListener("click", download);
@@ -335,10 +336,12 @@
 			}
 			// Startes to create objects and get inputs and assign to properties
 			newpage.variables = function getVarsCreateView(){
-				var cBtn = document.getElementById('createBtn');
+				var cBtn = document.getElementById('create');
 				cBtn.style.display = "none";
-				//load title
+				
+				//run object to help me know what is being called
 				var run = Object.create(newpage);
+				//load title
 				var title = Object.create(newpage,{inputTitle:{value:document.getElementById("inputTitle").value}});
 				console.log(title);
 				title.newtitle();
@@ -347,10 +350,13 @@
 				var test2 = Object.create(newpage, {inputRows:{value:document.getElementById("inputRows").value}}, {inputCols:{value:document.getElementById("inputCols").value}});
 				console.log(test2);
 				// load the rest of the page 
-				run.editBtn();
+				var mkEditBtn = Object.create(newpage, {btnName:{value:"Edit"}, btnClass:{value:"w3-btn w3-teal btnE"}});
+					console.log(mkEditBtn);
+					mkEditBtn.createBtn();
 				//pass information to modal and table 
 				test2.newModal();
 				test2.newTable();
+				
 				//call event listners 
 				run.init();
 
@@ -429,7 +435,7 @@
 			//Removes buttons getting the page ready for download
 			function download(){
 				// hide buttons
-				var cBtn = document.getElementById('createBtn');
+				var cBtn = document.getElementById('create');
 				cBtn.style.display = "none";
 
 			}
@@ -453,13 +459,19 @@
 			
 			var element = document.getElementById("div1");
 			//ask for page content
-			newpage.createBtn();
+			var buttonCreateName = 'create';
+			var buttonCreateClass = "w3-btn w3-red btn";
+			var mkCreateBtn = Object.create(newpage, {btnName:{value:buttonCreateName}, btnClass:{value:buttonCreateClass}});
+			console.log(mkCreateBtn);
+		
+			mkCreateBtn.createBtn();
 			newpage.clearModal();
 			newpage.createModal();
-			document.getElementById("createBtn").addEventListener("click", newpage.openModal);
-			document.getElementById("create").addEventListener("click", newpage.clearPage);
+			document.getElementById("create").addEventListener("click", newpage.openModal);
+			document.getElementById("createBtn").addEventListener("click", newpage.clearPage);
 			document.getElementById("cancelCreate").addEventListener("click", closeCreate);
-		
+			
+			return this;
 			// closes the Modal that creates the page
 			function closeCreate(){
 				var modal = document.getElementById('createModal');
@@ -479,9 +491,9 @@
 
 		var divView = document.getElementById('div1');
 
-		var cBtn = document.getElementById('createBtn');
+		var cBtn = document.getElementById('create');
 	
-		var edit = document.getElementById("editBtn");
+		var edit = document.getElementById("Edit");
 					
 		// var down = document.getElementById("downloadBtn");
 		
