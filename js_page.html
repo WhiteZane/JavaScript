@@ -75,6 +75,31 @@
 
 			var newpage = {};
 			
+			//This can create the buttons
+			newpage.createBtn = function makeButtons(){
+	
+				var classBtn =this.btnClass;
+				console.log(classBtn);
+				var nameBtn = this.btnName;
+				console.log(nameBtn);
+
+				this.button= [];
+				
+				this.button[nameBtn] = document.createElement("a");
+				this.button[nameBtn].setAttribute("id", nameBtn );
+				this.button[nameBtn].setAttribute("class", classBtn);
+
+				// don not use [] with nodes, nodes do not require anything besides defining where it goes.
+				this.buttonNode = document.createTextNode(nameBtn, [nameBtn]);
+
+				this.button[nameBtn].appendChild(this.buttonNode);
+				//create button 
+				element.appendChild(this.button[nameBtn]);
+				
+				return this;
+
+			}
+
 			// page creating Modal
 			newpage.createModal = function Modal(){
 				this.modalCreate = document.createElement("div");
@@ -91,7 +116,7 @@
 
 				//Modal form to pass data
 				this.modalForm1 = document.createElement("Form");
-				this.modalForm1.setAttribute("class", "w3-container w3-teal" );
+				this.modalForm1.setAttribute("class", "w3-container w3-teal");
 				//create loop to automate form
 				
 				
@@ -186,31 +211,7 @@
 				element.appendChild(this.title);
 				return this;
 			}
-			//This can create the buttons
-			newpage.createBtn = function makeButtons(){
-	
-				var classBtn =this.btnClass;
-				console.log(classBtn);
-				var nameBtn = this.btnName;
-				console.log(nameBtn);
-
-				this.button= [];
-				
-				this.button[nameBtn] = document.createElement("a");
-				this.button[nameBtn].setAttribute("id", nameBtn );
-				this.button[nameBtn].setAttribute("class", classBtn);
-
-				// don not use [] with nodes, nodes do not require anything besides defining where it goes.
-				this.buttonNode = document.createTextNode(nameBtn, [nameBtn]);
-
-				this.button[nameBtn].appendChild(this.buttonNode);
-				//create button 
-				element.appendChild(this.button[nameBtn]);
-				
-				return this;
-
-			}
-			
+		
 			//creates a table
 			newpage.newTable = function makeTable(){
 				
@@ -342,18 +343,23 @@
 				
 				//run object to help me know what is being called
 				var run = Object.create(newpage);
+				
 				//load title
 				var title = Object.create(newpage,{inputTitle:{value:document.getElementById("inputTitle").value}});
 				console.log(title);
 				title.newtitle();
 				console.log(title);
+				
 				//load rows and cols
 				var test2 = Object.create(newpage, {inputRows:{value:document.getElementById("inputRows").value}}, {inputCols:{value:document.getElementById("inputCols").value}});
 				console.log(test2);
-				// load the rest of the page 
+				
+				//make an edit button
 				var mkEditBtn = Object.create(newpage, {btnName:{value:"Edit"}, btnClass:{value:"w3-btn w3-teal btnE"}});
 					console.log(mkEditBtn);
 					mkEditBtn.createBtn();
+				
+				// load the rest of the page 
 				//pass information to modal and table 
 				test2.newModal();
 				test2.newTable();
@@ -387,6 +393,7 @@
 			
 			//Clears most page content so new tables can be created after download 
 			newpage.clearPage = function clearContent(){
+				
 				//find elements and remove
 				var divView = document.getElementById('div1');
 				
@@ -479,15 +486,9 @@
 				modal.style.display = "none";	
 			}
 			
-			
-
-		
-		
-
-
-			
 		}());
 	
+	//remove some buttons
 	function removeDownload(){
 
 		var divView = document.getElementById('div1');
@@ -502,7 +503,7 @@
 		divView.removeChild(edit);
 		
 	}
-
+	//helpful information for using the program
 	function help(){
 		alert("This page creates a table to get started press create and fill out the form"
 				+ "\n" +  "If you would like to restart the application press F5."
