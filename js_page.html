@@ -184,7 +184,7 @@
 				return this;
 			}
 			//This can create the buttons
-			newpage.createBtn = function makeCreateButton(){
+			newpage.createBtn = function makeButtons(){
 	
 				var classBtn =this.btnClass;
 				console.log(classBtn);
@@ -196,15 +196,13 @@
 				this.button[nameBtn] = document.createElement("a");
 				this.button[nameBtn].setAttribute("id", nameBtn );
 				this.button[nameBtn].setAttribute("class", classBtn);
-				
+
 				// don not use [] with nodes, nodes do not require anything besides defining where it goes.
 				this.buttonNode = document.createTextNode(nameBtn, [nameBtn]);
 
 				this.button[nameBtn].appendChild(this.buttonNode);
 				//create button 
 				element.appendChild(this.button[nameBtn]);
-				
-				
 				
 				return this;
 
