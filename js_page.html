@@ -238,7 +238,8 @@
 				element.appendChild(this.table);
 				return this;
 			}
-
+			
+			//This creates the modal for the edit button to input values
 			newpage.newModal = function MakeModal(){
 				var rows = inputRows.value;
 				var cols = inputCols.value;
@@ -313,7 +314,7 @@
 			
 			
 
-			
+			//Intializes the Event listners
 			newpage.init = function initListners(){
 				//Click open Modal
 				document.getElementById("editBtn").addEventListener("click", openWin);
@@ -332,7 +333,7 @@
 				document.getElementById("cancel").addEventListener("click", closeWin);
 				return this;
 			}
-			
+			// Startes to create objects and get inputs and assign to properties
 			newpage.variables = function getVarsCreateView(){
 				var cBtn = document.getElementById('createBtn');
 				cBtn.style.display = "none";
@@ -355,10 +356,13 @@
 
 				closeCreate();
 
+				//learning how to check properties
 				console.log(newpage.hasOwnProperty('newtitle'));
 
 				return this;
 			}
+
+			//CLears the Create Modal so it can be used again after download
 			newpage.clearModal = function clearCreateModal(){
 				//find the parent container
 				var divView = document.getElementById('div1');
@@ -373,6 +377,8 @@
 
 
 			}
+			
+			//Clears most page content so new tables can be created after download 
 			newpage.clearPage = function clearContent(){
 				//find elements and remove
 				var divView = document.getElementById('div1');
@@ -397,6 +403,7 @@
 				
 			}
 
+			//Assigns the input value to output values
 			newpage.rowColumn= function createView(){
 				var rows = inputRows.value;
 				var cols = inputCols.value;
@@ -418,18 +425,16 @@
 				var modal = document.getElementById('myModal');
 				modal.style.display = "none";
 			}
+			
+			//Removes buttons getting the page ready for download
 			function download(){
 				// hide buttons
 				var cBtn = document.getElementById('createBtn');
 				cBtn.style.display = "none";
-				var edit = document.getElementById("editBtn")
-				edit.style.display = "none";
-				var down = document.getElementById("downloadBtn")
-				down.style.display = "none";
-				alert("made it to function");
 
 			}
 
+			//Opens the modal for inputs 
 			function openWin(){
 				var modal = document.getElementById('myModal');
 				modal.style.display = "block";
@@ -455,7 +460,7 @@
 			document.getElementById("create").addEventListener("click", newpage.clearPage);
 			document.getElementById("cancelCreate").addEventListener("click", closeCreate);
 		
-
+			// closes the Modal that creates the page
 			function closeCreate(){
 				var modal = document.getElementById('createModal');
 				modal.style.display = "none";	
@@ -484,6 +489,7 @@
 		divView.removeChild(edit);
 		
 	}
+
 	function help(){
 		alert("This page creates a table to get started press create and fill out the form"
 				+ "\n" +  "If you would like to restart the application press F5."
