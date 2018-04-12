@@ -286,7 +286,7 @@
 				this.modalFormSave = document.createElement("a");
 				this.modalFormSave.setAttribute("id", "save" );
 				this.modalFormSave.setAttribute("class", "save w3-button w3-red");
-				this.modalFormSaveNode = document.createTextNode("Save");
+				this.modalFormSaveNode = document.createTextNode("Add");
 				this.modalFormCancel = document.createElement("a");
 				this.modalFormCancel.setAttribute("id", "cancel" );
 				this.modalFormCancel.setAttribute("class", "cancel w3-button w3-black");
@@ -337,6 +337,7 @@
 				var cBtn = document.getElementById('createBtn');
 				cBtn.style.display = "none";
 				//load title
+				var run = Object.create(newpage);
 				var title = Object.create(newpage,{inputTitle:{value:document.getElementById("inputTitle").value}});
 				console.log(title);
 				title.newtitle();
@@ -345,12 +346,12 @@
 				var test2 = Object.create(newpage, {inputRows:{value:document.getElementById("inputRows").value}}, {inputCols:{value:document.getElementById("inputCols").value}});
 				console.log(test2);
 				// load the rest of the page 
-				newpage.editBtn();
+				run.editBtn();
 				//pass information to modal and table 
 				test2.newModal();
 				test2.newTable();
 				//call event listners 
-				newpage.init();
+				run.init();
 
 				closeCreate();
 
