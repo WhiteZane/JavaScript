@@ -13,7 +13,7 @@
 			
 			.btnE {
 				margin-top:50px;
-				margin-bottom: 50jpx;
+				margin-bottom: 50px;
 				margin-left: 5vw;
 			}
 			.btn {
@@ -211,37 +211,7 @@
 				element.appendChild(this.title);
 				return this;
 			}
-		
-			//creates a table
-			newpage.newTable = function makeTable(){
-				
-				this.table = document.createElement('table');
-				this.table.setAttribute("id", "myTable" );
-				this.table.setAttribute("class", "w3-table-all w3-large tbl" );
-				var rows = inputRows.value;
- 				var amount = inputCols.value;
-				var counter = 0;
-				var col ="";
-				
-				do {
-					var row = this.table.insertRow(0);
-					// create columns
-					for (var i = 0; i < amount; i++ ){
-						
-						col[i] = row.insertCell(0);
-						//not working should insert text into columns
-						col.innerHTML ="To change text press edit";
-					
-					}
-					
-					counter ++;
-				}
-					
-				while (counter < rows);
-				element.appendChild(this.table);
-				return this;
-			}
-			
+
 			//This creates the modal for the edit button to input values
 			newpage.newModal = function MakeModal(){
 				var rows = inputRows.value;
@@ -263,6 +233,7 @@
 				//Modal form to pass data
 				this.modalForm = document.createElement("Form");
 				this.modalForm.setAttribute("class", "w3-container w3-teal" );
+				
 				//create loop to automate form
 				var count = totalInputs;
 				var i = 0;
@@ -270,6 +241,7 @@
 				this.modalFormLabel = [];
 				this.modalFormLabelNode = [];
 				this.modalFormTxtInput = [];
+				
 				// create input fields
 				do{
 					this.modalFormPara[i] = document.createElement("p");
@@ -309,14 +281,42 @@
 				this.modalContent.appendChild(this.modalSpan);
 				this.modalContent.appendChild(this.modalForm);
 				
-
+				//sending to div1 and appending to modal
 				this.modal.appendChild(this.modalContent);
 				element.appendChild(this.modal);
 				return this;
 			}
-			
-			
 
+			//creates a table
+			newpage.newTable = function makeTable(){
+				
+				this.table = document.createElement('table');
+				this.table.setAttribute("id", "myTable" );
+				this.table.setAttribute("class", "w3-table-all w3-large tbl" );
+				var rows = inputRows.value;
+ 				var amount = inputCols.value;
+				var counter = 0;
+				var col ="";
+				
+				do {
+					var row = this.table.insertRow(0);
+					// create columns
+					for (var i = 0; i < amount; i++ ){
+						
+						col[i] = row.insertCell(0);
+						//not working should insert text into columns
+						col.innerHTML ="To change text press edit";
+					
+					}
+					
+					counter ++;
+				}
+					
+				while (counter < rows);
+				element.appendChild(this.table);
+				return this;
+			}
+			
 			//Intializes the Event listners
 			newpage.init = function initListners(){
 				//Click open Modal
@@ -339,20 +339,20 @@
 			// Startes to create objects and get inputs and assign to properties
 			newpage.variables = function getVarsCreateView(){
 				var cBtn = document.getElementById('create');
-				cBtn.style.display = "none";
+					cBtn.style.display = "none";
 				
 				//run object to help me know what is being called
 				var run = Object.create(newpage);
 				
 				//load title
 				var title = Object.create(newpage,{inputTitle:{value:document.getElementById("inputTitle").value}});
-				console.log(title);
-				title.newtitle();
-				console.log(title);
+					console.log(title);
+					title.newtitle();
+					console.log(title);
 				
 				//load rows and cols
 				var test2 = Object.create(newpage, {inputRows:{value:document.getElementById("inputRows").value}}, {inputCols:{value:document.getElementById("inputCols").value}});
-				console.log(test2);
+					console.log(test2);
 				
 				//make an edit button
 				var mkEditBtn = Object.create(newpage, {btnName:{value:"Edit"}, btnClass:{value:"w3-btn w3-teal btnE"}});
@@ -375,7 +375,7 @@
 				return this;
 			}
 
-			//CLears the Create Modal so it can be used again after download
+			//Clears the Create Modal so it can be used again after download
 			newpage.clearModal = function clearCreateModal(){
 				//find the parent container
 				var divView = document.getElementById('div1');
@@ -398,7 +398,7 @@
 				var divView = document.getElementById('div1');
 				
 				var title = document.getElementById('myTitle');
-				console.log(title);
+					console.log(title);
 				var table = document.getElementById('myTable');
 				var modal = document.getElementById('myModal');
 				if (title === null){
@@ -433,13 +433,16 @@
 					}
 			}
 
-			
 			//function to close the edit window
 			function closeWin(){
 				var modal = document.getElementById('myModal');
 				modal.style.display = "none";
 			}
 			
+			function closeCreate(){
+				var modal = document.getElementById('createModal');
+				modal.style.display = "none";	
+			}
 			//Removes buttons getting the page ready for download
 			function download(){
 				// hide buttons
@@ -462,29 +465,27 @@
 				newpage.rowColumn();
 				 closeWin();
 			}
+
 		
-		//creating the page	
+			//creating the page	
 			
 			var element = document.getElementById("div1");
+			
 			//ask for page content
 			var buttonCreateName = 'create';
 			var buttonCreateClass = "w3-btn w3-red btn";
 			var mkCreateBtn = Object.create(newpage, {btnName:{value:buttonCreateName}, btnClass:{value:buttonCreateClass}});
-			console.log(mkCreateBtn);
-		
-			mkCreateBtn.createBtn();
+				console.log(mkCreateBtn);
+				mkCreateBtn.createBtn();
 			newpage.clearModal();
 			newpage.createModal();
+			
 			document.getElementById("create").addEventListener("click", newpage.openModal);
 			document.getElementById("createBtn").addEventListener("click", newpage.clearPage);
 			document.getElementById("cancelCreate").addEventListener("click", closeCreate);
 			
 			return this;
 			// closes the Modal that creates the page
-			function closeCreate(){
-				var modal = document.getElementById('createModal');
-				modal.style.display = "none";	
-			}
 			
 		}());
 	
@@ -503,6 +504,7 @@
 		divView.removeChild(edit);
 		
 	}
+	
 	//helpful information for using the program
 	function help(){
 		alert("This page creates a table to get started press create and fill out the form"
@@ -519,8 +521,6 @@
 </html>
 <script type="text/javascript">
 	//add event listeners
-
-
 
 	// creating objects and properties
 	// var newtest = {};
