@@ -1,7 +1,8 @@
 <!doctype html>
 	<head>
-		<title> Java script table maker </title>
+		<title> Javascript table maker </title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="zane">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	</head>
 	
@@ -118,6 +119,7 @@
 					this.modalFormPara2.appendChild(this.modalFormLabel2);
 					this.modalFormPara2.appendChild(this.modalFormTxtInput2);
 					this.modalForm1.appendChild(this.modalFormPara2);
+				
 				// create input fields
 				
 					this.modalFormPara3 = document.createElement("p");
@@ -164,6 +166,7 @@
 			
 			//open Create page modal
 			newpage.openModal = function readyModal(){
+				
 				var modal = document.getElementById('createModal');
 				modal.style.display = "block";
 				return this;
@@ -174,6 +177,7 @@
 				console.log(inputTitle.value);
 				this.title = document.createElement("h1");
 				this.title.setAttribute("class", "w3-container w3-teal" );
+				this.title.setAttribute("id", "myTitle" );
 				this.titleNode = document.createTextNode(inputTitle.value);
 				this.title.appendChild(this.titleNode);
 				element.appendChild(this.title);
@@ -209,6 +213,7 @@
 			newpage.newTable = function makeTable(){
 				
 				this.table = document.createElement('table');
+				this.table.setAttribute("id", "myTable" );
 				this.table.setAttribute("class", "w3-table-all w3-large tbl" );
 				var rows = inputRows.value;
  				var amount = inputCols.value;
@@ -233,6 +238,7 @@
 				element.appendChild(this.table);
 				return this;
 			}
+
 			newpage.newModal = function MakeModal(){
 				var rows = inputRows.value;
 				var cols = inputCols.value;
@@ -303,7 +309,6 @@
 				this.modal.appendChild(this.modalContent);
 				element.appendChild(this.modal);
 				return this;
-
 			}
 			
 			
@@ -328,31 +333,67 @@
 				return this;
 			}
 			
-			newpage.variables = function getVars(){
+			newpage.variables = function getVarsCreateView(){
 				var cBtn = document.getElementById('createBtn');
 				cBtn.style.display = "none";
-				var test = Object.create(newpage,{inputTitle:{value:document.getElementById("inputTitle").value}});
-				console.log(test);
-				var test2 = Object.create(newpage,{inputRows:{value:document.getElementById("inputRows").value}});
+				//load title
+				var title = Object.create(newpage,{inputTitle:{value:document.getElementById("inputTitle").value}});
+				console.log(title);
+				title.newtitle();
+				console.log(title);
+				//load rows and cols
+				var test2 = Object.create(newpage, {inputRows:{value:document.getElementById("inputRows").value}}, {inputCols:{value:document.getElementById("inputCols").value}});
 				console.log(test2);
-				var test3 = Object.create(newpage,{inputCols:{value:document.getElementById("inputCols").value}});
-				console.log(test3);
-				//continue loading page
-				newpage.view();
+				// load the rest of the page 
+				newpage.editBtn();
+				//pass information to modal and table 
+				test2.newModal();
+				test2.newTable();
+				//call event listners 
+				newpage.init();
+
+				closeCreate();
+
+				console.log(newpage.hasOwnProperty('newtitle'));
 
 				return this;
 			}
+			newpage.clearModal = function clearCreateModal(){
+				//find the parent container
+				var divView = document.getElementById('div1');
+				
+				//find the create modal
+				var modalCreate = document.getElementById('createModal');
+				if (modalCreate === null){
+					return;
+				}else{
+					divView.removeChild(modalCreate);
+				}
 
-			newpage.view = function saveCreate(){
-				//grab the inputs from modal set variables
-				closeCreate();
 
-				//create the page 
-				newpage.newtitle();
-				newpage.editBtn();
-				newpage.newModal();
-				newpage.newTable();
-				newpage.init();
+			}
+			newpage.clearPage = function clearContent(){
+				//find elements and remove
+				var divView = document.getElementById('div1');
+				
+				var title = document.getElementById('myTitle');
+				console.log(title);
+				var table = document.getElementById('myTable');
+				var modal = document.getElementById('myModal');
+				if (title === null){
+					var start  = Object.create(newpage);
+					start.variables();
+				}else{
+					divView.removeChild(title);
+					divView.removeChild(table);
+					divView.removeChild(modal);
+
+					var start  = Object.create(newpage);
+					start.variables();
+				}
+					
+
+				
 			}
 
 			newpage.rowColumn= function createView(){
@@ -407,9 +448,10 @@
 			var element = document.getElementById("div1");
 			//ask for page content
 			newpage.createBtn();
+			newpage.clearModal();
 			newpage.createModal();
 			document.getElementById("createBtn").addEventListener("click", newpage.openModal);
-			document.getElementById("create").addEventListener("click", newpage.variables);
+			document.getElementById("create").addEventListener("click", newpage.clearPage);
 			document.getElementById("cancelCreate").addEventListener("click", closeCreate);
 		
 
@@ -426,12 +468,13 @@
 
 			
 		}());
+	
 	function removeDownload(){
 
 		var divView = document.getElementById('div1');
 
 		var cBtn = document.getElementById('createBtn');
-					
+	
 		var edit = document.getElementById("editBtn");
 					
 		// var down = document.getElementById("downloadBtn");
