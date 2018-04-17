@@ -12,9 +12,7 @@
 figure{
 	display:inline-block;
 }
-h1 {
-	
-}
+
 .link:after{
   content: '';
   position: absolute;
