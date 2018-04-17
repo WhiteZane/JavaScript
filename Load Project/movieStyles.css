@@ -1,0 +1,74 @@
+/*My movie styles */
+
+/*slide animation*/
+figure{
+	display:inline-block;
+}
+.link:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 2px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: black;
+  transition: width .2s ease;
+  -webkit-transition: width .2s ease;
+}
+ 
+.link:hover:after{
+  width: 70%;
+  left: 0;
+  background: black;
+}
+
+main {
+	display:block;
+	width: 80vw;
+	margin-left:18vw;
+	font-family: 'Arial';
+}
+
+main h2{
+	border:1px solid black;
+	padding:5px;
+}
+
+nav{
+	display:block;
+	position: absolute;
+	width:15vw;
+	height:100vh;
+	background-color: #E6CE1D;
+	
+}
+
+nav a {
+	text-decoration:none;
+	color:black;
+	font-family: 'Arial';
+	font-size:16px;
+	
+}
+
+nav li{
+	margin-top:25px;
+}
+
+nav ul{
+	list-style: none;
+}
+.row {
+	display:flex;
+	flex-direction: row;
+}
+.imgCol {
+	flex-direction: column;
+}
+.title {
+	font-family:'Georgia';
+	text-align: center;
+	background-color:black;
+	color:#E6CE1D;
+}
+
