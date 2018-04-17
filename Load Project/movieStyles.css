@@ -1,8 +1,19 @@
 /*My movie styles */
 
 /*slide animation*/
+.banner{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	background-color:black;
+	border:1px solid gold;
+	height:50px;
+}
 figure{
 	display:inline-block;
+}
+h1 {
+	
 }
 .link:after{
   content: '';
@@ -30,7 +41,6 @@ main {
 }
 
 main h2{
-	border:1px solid black;
 	padding:5px;
 }
 
@@ -40,6 +50,7 @@ nav{
 	width:15vw;
 	height:100vh;
 	background-color: #E6CE1D;
+	margin-top:10px;
 	
 }
 

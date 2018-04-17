@@ -12,7 +12,9 @@
 	</head>
 
 	<body>
-		<h1 class="title"> My Movie collection </h1>
+		<div class="banner">
+			<h1 class="title"> My Movie collection </h1>
+		</div>
 		<nav>
 			<ul>
 				<li><a id="Home" class="link" href="#">Home</a></li>
@@ -23,13 +25,13 @@
 			</ul>
 		</nav>
 		<main>
-			<h2> My movies</h2>
-			<div class="row">
+			<h2 id="subTitle">Home</h2>
+		
 				<div id ="imgCol" class="column">
 					
 
 				</div>
-			</div>
+		
 		</main>
 	</body>
 		<script>
@@ -53,23 +55,33 @@
 			}
 
 			function home (){
+				var subTitle = document.getElementById("subTitle");
+				subTitle.textContent = "Home";
 				var element = document.getElementById("imgCol");
 				element.innerHTML = "";
 				getImages();
 			}
 			function newest (){
-				 search = 'newest';
+				var subTitle = document.getElementById("subTitle");
+				subTitle.textContent = "Newest Movies";
+				search = 'newest';
 				newsearch.view(search);
 			}
 			function fav (){
+				var subTitle = document.getElementById("subTitle");
+				subTitle.textContent = "Favorite Movies";
 				search = 'fav';
 				 newsearch.view(search);
 			}
 			function most (){
+				var subTitle = document.getElementById("subTitle");
+				subTitle.textContent = "Most Watched Movies";
 				search = 'most';
 				 newsearch.view(search);
 			}
 			function kids (){
+				var subTitle = document.getElementById("subTitle");
+				subTitle.textContent = "Kids Movies";
 				search = 'kids';
 				 newsearch.view(search);
 			}
