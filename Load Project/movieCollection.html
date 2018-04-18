@@ -106,7 +106,7 @@
 				 newsearch.view(search);
 			}
 
-			setTimeout(
+			
 				function getImages (search, click){
 				var click = click;
 				console.log(click);			
@@ -134,7 +134,7 @@
 				.always(function(){
 					console.log("complete");
 				})
-			}, 5000);
+			};
 			function setClickImages(images){
 				//check the object
 				console.log(images);
@@ -227,11 +227,12 @@
 				
 
 			};
-			function start(){
+			
+			setTimeout( function start(){
 				getImages();
 				intiliaze();
 				
-			};
+			}, 5000)
 			
 			window.onload = start();
 
