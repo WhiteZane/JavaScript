@@ -25,7 +25,7 @@
 				element.innerHTML = "";
 				var click = 1;
 				getImages(search, click); 
-			}
+			};
 
 			//On click functions for Event listners
 			function home (){
@@ -90,7 +90,7 @@
 				})
 				.always(function(){
 					console.log("complete");
-				})
+				});
 			};
 
 			//Set the images from clicking on events
@@ -110,7 +110,7 @@
 						this.frame.setAttribute("id", "imgFigure");
 						
 						//set the images
-				 			this.img = document.createElement("IMG")
+				 			this.img = document.createElement("IMG");
 				 			this.img.setAttribute("src", noQuote);
 			    			this.img.setAttribute("width", "300");
 			    			this.img.setAttribute("width", "200");
@@ -171,7 +171,7 @@
 						this.frame.setAttribute("id", "imgFigure");
 						
 						//set the images
-				 			this.img = document.createElement("IMG")
+				 			this.img = document.createElement("IMG");
 				 			this.img.setAttribute("src", noQuote);
 			    			this.img.setAttribute("width", "300");
 			    			this.img.setAttribute("width", "200");
@@ -190,4 +190,4 @@
 				 } while(count < images.length);
 				 }
 				 
-		};
+		}
