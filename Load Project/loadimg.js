@@ -1,26 +1,41 @@
-function intiliaze (){
+			//Call external JavaScript
+
+			$(document).ready(function(){
+				getImages();
+				intiliaze();
+			}); 
+
+			//Start the event listeners
+			function intiliaze (){
 				document.getElementById("Home").addEventListener("click", home);
 				document.getElementById("Newest").addEventListener("click", newest);
 				document.getElementById("Fav").addEventListener("click", fav);
 				document.getElementById("Most").addEventListener("click", most);
 				document.getElementById("Kids").addEventListener("click", kids);
-
 			}
+			
+			//New object
 			newsearch = {};
+
+			//Object that gets different array items for views 
 			newsearch.view = function (search){
 				var search = search;
 				console.log(search);
 				var element = document.getElementById("imgCol");
 				element.innerHTML = "";
-				getImages(search); 
+				var click = 1;
+				getImages(search, click); 
 			}
 
+			//On click functions for Event listners
 			function home (){
 				var subTitle = document.getElementById("subTitle");
 				subTitle.textContent = "Home";
 				var element = document.getElementById("imgCol");
 				element.innerHTML = "";
-				getImages();
+				//this wont work anymore
+				//getImages();
+				newsearch.view();
 			}
 			function newest (){
 				var subTitle = document.getElementById("subTitle");
@@ -47,8 +62,11 @@ function intiliaze (){
 				 newsearch.view(search);
 			}
 
-			function getImages (search){
-			
+			//Make the Jquery Ajax call to get images
+				function getImages (search, click){
+				
+				var click = click;
+				console.log(click);			
 				var jsonImage = $.getJSON("imgList.json", function( data ){
 					
 					images = data[search];
@@ -56,8 +74,13 @@ function intiliaze (){
 					if (images === undefined){
 						var images = data['images'];
 					}
+					if (click == 1){
+						setClickImages(images);
+					}
+					if(click === undefined){
+						setImages(images);
+					}
 					
-					setImages(images);
 				})
 				.done(function(){
 					console.log("second success");
@@ -69,7 +92,39 @@ function intiliaze (){
 					console.log("complete");
 				})
 			};
-			
+
+			//Set the images from clicking on events
+			function setClickImages(images){
+				
+				//check the object
+				console.log(images);
+				//set the parent container as var
+				var element = document.getElementById("imgCol");
+				
+				for(var i = 0; i < images.length; i++){
+				 		var picture = images[i];
+				 	 		console.log(picture);
+				 	 		var noQuote = picture.replace(/\"/g, '');
+				 	 		console.log(picture);
+				 		this.frame = document.createElement("Figure");
+						this.frame.setAttribute("id", "imgFigure");
+						
+						//set the images
+				 			this.img = document.createElement("IMG")
+				 			this.img.setAttribute("src", noQuote);
+			    			this.img.setAttribute("width", "300");
+			    			this.img.setAttribute("width", "200");
+			     			this.img.setAttribute("alt", "Movie Images");
+				 			
+				 			//put picture into frame
+				 			this.frame.appendChild(this.img);
+				 			
+				 			//put frame into div
+				 			element.appendChild(this.frame);
+				 	}
+			}
+
+			// Set the Home pages images on first load to fill place holders and then loop through any extras
 			function setImages(images){
 				//check the object
 				console.log(images);
@@ -77,37 +132,62 @@ function intiliaze (){
 				//set the parent container as var
 				var element = document.getElementById("imgCol");
 				
-				// loop object var
+				//variables for the loop
+				var image = [];
+
+				//image frame
+				var imgF;
+
+				var id = "img";
 				
-				 Object.keys(images).forEach(function(key)
-				 	{
-						console.log(key, JSON.stringify(images[key]));
-				 			var count = 0;
-				 			var picture = JSON.stringify(images[key]);
+
+				//fill the first 6 place holders
+				 for(var i = 0; i < 6; i++)
+				 {
+				 	id += i;
+				 	console.log(id);
+					image[i] = images[i];
+					imgF = document.getElementById(id);
+					imgF.setAttribute("src", image[i]);
+					imgF.setAttribute("width", "200");
+			    		
+					console.log(imgF);
+				 }
+				 console.log(images.length);
+				 
+				 
+				 var count = images.length - 1;
+				//if there are more than 6 movies create the rest of them
+				 if (images.length > 5){
+				 	 //Start the do while loop
+				 	do{
+				 	//Start setting the images
+				 	for(var i = 6; i < images.length; i++){
+				 		var picture = images[i];
 				 	 		console.log(picture);
 				 	 		var noQuote = picture.replace(/\"/g, '');
 				 	 		console.log(picture);
-				 	 		//create figure
-				 			this.frame = document.createElement("Figure");
-							this.frame.setAttribute("id", "imgFigure");
-							//create image place
+				 		this.frame = document.createElement("Figure");
+						this.frame.setAttribute("id", "imgFigure");
+						
+						//set the images
 				 			this.img = document.createElement("IMG")
 				 			this.img.setAttribute("src", noQuote);
 			    			this.img.setAttribute("width", "300");
 			    			this.img.setAttribute("width", "200");
 			     			this.img.setAttribute("alt", "Movie Images");
+				 			
 				 			//put picture into frame
 				 			this.frame.appendChild(this.img);
+				 			
 				 			//put frame into div
 				 			element.appendChild(this.frame);
-					 	
-				 	});
-				
-				
+				 	}
+				 		
+				 	
+				 	count++;
 
-			};
-			function start(){
-				getImages();
-				intiliaze();
-				
-			};
+				 } while(count < images.length);
+				 }
+				 
+		};
