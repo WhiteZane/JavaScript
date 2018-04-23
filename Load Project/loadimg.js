@@ -137,7 +137,7 @@
 
 				//image frame
 				var imgF;
-
+				//id name for figures add the number to the end
 				var id = "img";
 				
 
